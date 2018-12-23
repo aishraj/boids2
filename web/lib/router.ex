@@ -11,6 +11,7 @@ defmodule Web.Router do
     conn
     |> put_resp_content_type("application/json")
     |> put_status(200)
+    |> put_resp_header("Access-Control-Allow-Origin", "*")
     |> send_resp(200, Jason.encode!(current_state))
   end
 

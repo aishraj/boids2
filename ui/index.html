@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+</head>
+
+<body>
+  <canvas width="960" height="500"></canvas>
+  <script src="https://d3js.org/d3.v4.min.js"></script>\
+  <script>
+    // TODO: On every animation loop it should make the API call then then start painting the canvas.
+    window.requestAnimationFrame(tick);
+    function tick() {
+      let canvas = document.querySelector("canvas"),
+      context = canvas.getContext("2d");
+      let width = 960;
+      let height = 500;
+      context.clearRect(0, 0, width, height);
+      d3.json("http://127.0.0.1:8080/boids", (data) => {
+
+        context.fillStyle = "green";
+        data.forEach((dataPoint) => {
+          context.arc(dataPoint.x * 1000, dataPoint.y * 1000, 0.2, 0, 0.2 * Math.PI);
+          context.fill();
+        });
+      });
+    }
+  </script>
+</body>
+
+</html>
